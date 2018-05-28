@@ -39,17 +39,13 @@ export default class WeatherChannel extends Component {
       this.setState({conditionData});
     }
 
-    handleForecastData(data){
-
-    }
-
     // onSubmit() {
     //   alert('Clicked');
     //   fetchConditionData(this.state.curCity, (data) => {this.handleCondtionData(data)});
     // }
 
     componentDidMount() {
-      alert('Clicked, now run the componentDidMount.');
+      // alert('Clicked, now run the componentDidMount.');
       fetchConditionData(this.state.curCity, (data) => {this.handleConditionData(data)});
       // get the forecast data:
       fetchForecastData(this.state.curCity, (forecast) => {
@@ -57,7 +53,7 @@ export default class WeatherChannel extends Component {
           return {weekday: item.date.weekday_short, hight: item.high.celsius, low: item.low.celsius, icon_url: item.icon_url
           }
         })
-      this.setState({forecast: data});
+      this.setState({days: data});
       });
     }
 
@@ -72,7 +68,7 @@ export default class WeatherChannel extends Component {
                            temp={temp} />
           </section>
           <section id="right">
-            <Forecaster days={this.state.days}/>
+            <Forecaster day={this.state.days}/>
           </section>
         </main>
       )

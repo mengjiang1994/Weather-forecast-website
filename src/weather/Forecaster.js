@@ -4,9 +4,9 @@ import React from 'react';
 function DailyItem(props) {
     const day = props.day;
     return (
-            <div>
+            <div className="item">
 	            <span id="weekday">{day.weekday}</span>
-	            <span> <img src={day.icon} /></span>
+	            <span> <img src={day.icon_url} /></span>
 	            <span id="high">{day.high}</span>
 	            <span id="low">{day.low}</span>
             </div>
@@ -16,7 +16,7 @@ function DailyItem(props) {
 
 export default function Forecaster(props) {
     
-    return props.days.map(
-        (day, i) => <DailyItem key={`${day.weekday}_${i}`} day={day} />
+    return props.day.map(
+        (day, i) => <DailyItem day={day} />
     )
 }
