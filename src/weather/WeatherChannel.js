@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 
 import CityCondition from './CityCondition';
 import Forecaster    from './Forecaster';
+import Toolbar from './Toolbar';
 import {fetchConditionData, fetchForecastData} from './weather';
 // also include another comp for search input and other functions
 // import Toolbar       from './Toolbar'; // will define later
@@ -44,6 +45,11 @@ export default class WeatherChannel extends Component {
     //   fetchConditionData(this.state.curCity, (data) => {this.handleCondtionData(data)});
     // }
 
+    onRefresh() {
+      //alert('Clicked');
+      fetchConditionData(this.state.curCity, (data) => {this.handleConditionData(data)});
+    }
+
     componentDidMount() {
       // alert('Clicked, now run the componentDidMount.');
       fetchConditionData(this.state.curCity, (data) => {this.handleConditionData(data)});
@@ -61,7 +67,14 @@ export default class WeatherChannel extends Component {
       const {city, weather, temp} = this.state.conditionData;
       return (
         <main>
-          {/* <Toolbar /> */}
+          <nav>
+            <input value={this.state.curCity}
+                   onChange={(e) => this.setState({curCity:e.target.value})} />
+            <button onClick={() => {this.onRefresh() } }>Load</button>
+          </nav>
+          {/* <section id="Toolbar">
+            <Toolbar city={this.state.curCity} onRefresh={() => this.onRefresh()}/>
+          </section> */}
           <section id="left">
             <CityCondition city={city} 
                            weather={weather} 
